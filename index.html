@@ -1,13 +1,70 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAGLE ESPORTS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EAGLE ESPORTS</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
+header{padding:22px;background:#111;border-bottom:1px solid #c9a227;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:bold;color:#d4af37}
+.menu{color:#d4af37;font-size:14px}
+.hero{text-align:center;padding:65px 18px;background:linear-gradient(145deg,#25200e,#090909 65%)}
+.hero h1{font-size:36px;color:#e2bd55;margin:10px}
+.hero p{color:#ccc}
+.btn{background:#d4af37;color:#111;border:0;border-radius:7px;padding:13px 24px;font-weight:bold;margin-top:15px}
+section{padding:22px}
+h2{color:#d4af37}
+.card{background:#171717;border:1px solid #51421c;border-radius:12px;padding:18px;margin:14px 0}
+.card h3{color:#e1bd55}
+.info{color:#aaa;font-size:14px}
+nav{position:fixed;bottom:0;left:0;width:100%;background:#151515;border-top:1px solid #51421c;display:flex;justify-content:space-around;padding:15px 5px}
+nav a{color:#d4af37;text-decoration:none;font-size:12px}
+footer{padding:45px 20px 85px;text-align:center;color:#888}
+</style>
 </head>
-<body style="background:#111;color:#d4af37;text-align:center;">
-  <h1>EAGLE ESPORTS</h1>
-  <h2>WELCOME TO THE ARENA</h2>
-  <p>Compete. Win. Dominate.</p>
+<body>
+<header>
+<div class="logo">🦅 EAGLE ESPORTS</div>
+<div class="menu">MENU ☰</div>
+</header>
+<div class="hero">
+<h1>WELCOME TO THE ARENA</h1>
+<p>Compete. Win. Dominate.</p>
+<p>Join exciting esports tournaments!</p>
+<button class="btn" onclick="document.getElementById('tournaments').scrollIntoView()">EXPLORE TOURNAMENTS</button>
+</div>
+<section id="tournaments">
+<h2>🏆 LIVE TOURNAMENTS</h2>
+<div class="card">
+<h3>FREE FIRE SOLO</h3>
+<p class="info">Entry Fee: ₹20</p>
+<p class="info">Prize Pool: ₹500</p>
+<p class="info">Status: Coming Soon</p>
+<button class="btn" onclick="alert('Tournament registration will open soon!')">VIEW DETAILS</button>
+</div>
+<div class="card">
+<h3>FREE FIRE SQUAD</h3>
+<p class="info">Entry Fee: ₹80</p>
+<p class="info">Prize Pool: ₹2000</p>
+<p class="info">Status: Coming Soon</p>
+<button class="btn" onclick="alert('Tournament registration will open soon!')">VIEW DETAILS</button>
+</div>
+</section>
+<section>
+<h2>ABOUT US</h2>
+<div class="card">
+<p>Welcome to EAGLE ESPORTS. Compete in tournaments, show your skills and become a champion!</p>
+</div>
+</section>
+<footer>© 2026 EAGLE ESPORTS<br>All Rights Reserved</footer>
+<nav>
+<a href="#">HOME</a>
+<a href="#tournaments">TOURNAMENTS</a>
+<a href="#">MATCHES</a>
+<a href="#">PROFILE</a>
+</nav>
 </body>
 </html>
