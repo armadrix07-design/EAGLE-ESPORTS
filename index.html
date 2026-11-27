@@ -143,12 +143,25 @@ footer{padding:45px 20px 85px;text-align:center;color:#888}#profile {
 
     </div>
 
-    <div id="playerDashboard" style="display:none">
-      <h2>WELCOME PLAYER!</h2>
-      <p id="playerName"></p>
-      <button class="auth-btn"
-      onclick="playerLogout()">LOGOUT</button>
-    </div>
+  
+<div id="playerDashboard" style="display:none">
+  <h2>🏆 PLAYER DASHBOARD</h2>
+  <div class="card">
+    <h3>👤 PLAYER PROFILE</h3>
+    <p id="playerName">Player Name</p>
+    <p id="playerEmail"></p>
+  </div>
+  <div class="card">
+    <h3>🎮 MY TOURNAMENTS</h3>
+    <p>No tournaments joined yet.</p>
+  </div>
+  <div class="card">
+    <h3>📊 MATCH HISTORY</h3>
+    <p>No matches played yet.</p>
+  </div>
+  <button class="auth-btn" onclick="playerLogout()">LOGOUT</button>
+</div>
+    
 
     <p id="authMessage"></p>
 
