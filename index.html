@@ -22,7 +22,53 @@ h2{color:#d4af37}
 .info{color:#aaa;font-size:14px}
 nav{position:fixed;bottom:0;left:0;width:100%;background:#151515;border-top:1px solid #51421c;display:flex;justify-content:space-around;padding:15px 5px}
 nav a{color:#d4af37;text-decoration:none;font-size:12px}
-footer{padding:45px 20px 85px;text-align:center;color:#888}
+footer{padding:45px 20px 85px;text-align:center;color:#888}#profile {
+  padding: 35px 18px 110px;
+  min-height: 500px;
+}
+
+.auth-box {
+  max-width: 430px;
+  margin: 25px auto;
+  padding: 25px 20px;
+  background: linear-gradient(145deg,#191919,#080808);
+  border: 1px solid #d4af37;
+  border-radius: 18px;
+}
+
+.auth-logo {
+  text-align: center;
+  color: #d4af37;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.auth-box h2 {
+  color: #e1bd55;
+  text-align: center;
+}
+
+.auth-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin: 8px 0;
+  background: #242424;
+  color: white;
+  border: 1px solid #655323;
+  border-radius: 9px;
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  background: #d4af37;
+  color: #111;
+  border: none;
+  border-radius: 9px;
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -59,14 +105,75 @@ footer{padding:45px 20px 85px;text-align:center;color:#888}
 <p>Welcome to EAGLE ESPORTS. Compete in tournaments, show your skills and become a champion!</p>
 </div>
 </section>
+  <section id="profile">
+
+  <div class="auth-box">
+
+    <div class="auth-logo">🦅 EAGLE ESPORTS</div>
+
+    <p class="auth-sub">PLAYER ACCOUNT PORTAL</p>
+
+    <div id="authForms">
+
+      <h2>WELCOME BACK</h2>
+
+      <label>Email Address</label>
+      <input type="email" id="playerEmail"
+      placeholder="Enter your email">
+
+      <label>Password</label>
+      <input type="password" id="playerPassword"
+      placeholder="Enter your password">
+
+      <p class="auth-link"
+      onclick="togglePassword()">
+      SHOW / HIDE PASSWORD
+      </p>
+
+      <button class="auth-btn"
+      onclick="playerLogin()">LOGIN</button>
+
+      <button class="auth-btn"
+      onclick="playerSignup()">CREATE ACCOUNT</button>
+
+      <p class="auth-link"
+      onclick="resetPlayerPassword()">
+      FORGOT PASSWORD?
+      </p>
+
+    </div>
+
+    <div id="playerDashboard" style="display:none">
+      <h2>WELCOME PLAYER!</h2>
+      <p id="playerName"></p>
+      <button class="auth-btn"
+      onclick="playerLogout()">LOGOUT</button>
+    </div>
+
+    <p id="authMessage"></p>
+
+  </div>
+
+        </section>
 <footer>© 2026 EAGLE ESPORTS<br>All Rights Reserved</footer>
 <nav>
 <a href="#">HOME</a>
 <a href="#tournaments">TOURNAMENTS</a>
 <a href="#">MATCHES</a>
-<a href="#">PROFILE</a>
+<a href="#profile">PROFILE</a>
 </nav>
   <script type="module">
+    import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBkIvvs3tPfBFKhQIEtPHAVNoV5lwEhFXc",
@@ -77,6 +184,65 @@ const firebaseConfig = {
   appId: "1:205705727264:web:5b6ba58daa32682fe75b45",
   measurementId: "G-76C2GDKBDB"
 };
+    const auth = getAuth(initializeApp(firebaseConfig));
+
+const message = document.getElementById("authMessage");
+
+window.playerSignup = async function() {
+  const email = document.getElementById("playerEmail").value.trim();
+  const password = document.getElementById("playerPassword").value;
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    message.textContent = "Account created successfully!";
+  } catch (error) {
+    message.textContent = error.message;
+  }
+};
+
+window.playerLogin = async function() {
+  const email = document.getElementById("playerEmail").value.trim();
+  const password = document.getElementById("playerPassword").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    message.textContent = "Login successful!";
+  } catch (error) {
+    message.textContent = error.message;
+  }
+};
+
+window.resetPlayerPassword = async function() {
+  const email = document.getElementById("playerEmail").value.trim();
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    message.textContent = "Reset email sent!";
+  } catch (error) {
+    message.textContent = error.message;
+  }
+};
+
+window.playerLogout = async function() {
+  await signOut(auth);
+};
+
+window.togglePassword = function() {
+  const field = document.getElementById("playerPassword");
+  field.type = field.type === "password" ? "text" : "password";
+};
+
+onAuthStateChanged(auth, user => {
+  document.getElementById("authForms").style.display =
+    user ? "none" : "block";
+
+  document.getElementById("playerDashboard").style.display =
+    user ? "block" : "none";
+
+  if (user) {
+    document.getElementById("playerName").textContent = user.email;
+  }
+});
  </script>   
 </body>
 </html>
